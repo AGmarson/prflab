@@ -124,6 +124,12 @@ void rotate_8(int dim, pixel *src, pixel *dst)
     }
 }
 
+char rotate_descr[] = "rotate: current best working solution";
+void rotate(int dim, pixel *src, pixel *dst)
+{
+    rotate_8(dim, src, dst);
+}
+
 /*
  * register_rotate_functions - Register all of your different versions
  *     of the rotate kernel with the driver by calling the
@@ -134,6 +140,7 @@ void register_rotate_functions()
     add_rotate_function(&naive_rotate, naive_rotate_descr);
     add_rotate_function(&rotate_32, rotate_32_descr);
     add_rotate_function(&rotate_8, rotate_8_descr);
+    add_rotate_function(&rotate, rotate_descr);
     /* ... Register additional test functions here */
 }
 
