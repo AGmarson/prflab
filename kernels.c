@@ -48,8 +48,8 @@ void naive_rotate(int dim, pixel *src, pixel *dst)
  * rotate - Your current working version of rotate
  * IMPORTANT: This is the version you will be graded on
  */
-char rotate_descr[] = "rotate: Current working version";
-void rotate(int dim, pixel *src, pixel *dst)
+char rotate_32_descr[] = "rotate_32: loop unroll 32, blocksize 32";
+void rotate_32(int dim, pixel *src, pixel *dst)
 {
     int i, j, blocksize, bi, bj;
     blocksize = 32;
@@ -59,9 +59,8 @@ void rotate(int dim, pixel *src, pixel *dst)
         {
             for (i = bi; i < bi + blocksize; i++)
             {
-                pixel *src_addr = src + RIDX(i, bj, dim);             // i*dim + j
-                pixel *dst_addr = dst + RIDX((dim - 1 - bj), i, dim); //(dim - 1 - j)*dim + i
-                int negjdim = -j * dim;
+                pixel *src_addr = src + RIDX(i, bj, dim);             // i*dim + bj
+                pixel *dst_addr = dst + RIDX((dim - 1 - bj), i, dim); //(dim - 1 - bj)*dim + i
                 dst_addr[0] = src_addr[0];
                 dst_addr[-dim] = src_addr[1];
                 dst_addr[-(2 * dim)] = src_addr[2];
@@ -99,6 +98,32 @@ void rotate(int dim, pixel *src, pixel *dst)
     }
 }
 
+char rotate_8_descr[] = "rotate_8: loop unroll 8, blocksize 8";
+void rotate_8(int dim, pixel *src, pixel *dst)
+{
+    int i, j, blocksize, bi, bj;
+    blocksize = 8;
+    for (bi = 0; bi < dim; bi += blocksize)
+    {
+        for (bj = 0; bj < dim; bj += blocksize)
+        {
+            for (i = bi; i < bi + blocksize; i++)
+            {
+                pixel *src_addr = src + RIDX(i, bj, dim);             // i*dim + bj
+                pixel *dst_addr = dst + RIDX((dim - 1 - bj), i, dim); //(dim - 1 - bj)*dim + i
+                dst_addr[0] = src_addr[0];
+                dst_addr[-dim] = src_addr[1];
+                dst_addr[-(2 * dim)] = src_addr[2];
+                dst_addr[-(3 * dim)] = src_addr[3];
+                dst_addr[-(4 * dim)] = src_addr[4];
+                dst_addr[-(5 * dim)] = src_addr[5];
+                dst_addr[-(6 * dim)] = src_addr[6];
+                dst_addr[-(7 * dim)] = src_addr[7];
+            }
+        }
+    }
+}
+
 /*
  * register_rotate_functions - Register all of your different versions
  *     of the rotate kernel with the driver by calling the
@@ -107,7 +132,8 @@ void rotate(int dim, pixel *src, pixel *dst)
 void register_rotate_functions()
 {
     add_rotate_function(&naive_rotate, naive_rotate_descr);
-    add_rotate_function(&rotate, rotate_descr);
+    add_rotate_function(&rotate_32, rotate_32_descr);
+    add_rotate_function(&rotate_8, rotate_8_descr);
     /* ... Register additional test functions here */
 }
 
