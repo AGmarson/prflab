@@ -58,7 +58,7 @@ void rotate(int dim, pixel *src, pixel *dst)
         pixel *src_addr = src + i * dim; //i*dim + j
         pixel *dst_addr = dst + ((dim - 1) * dim + i); //(dim - 1 - j)*dim + i
     
-        for (j = 0; j < dim; j += 8)
+        for (j = 0; j < dim; j += 16)
         {
             int negjdim = -j*dim;
             dst_addr[negjdim] = src_addr[j];
@@ -69,6 +69,14 @@ void rotate(int dim, pixel *src, pixel *dst)
             dst_addr[negjdim - (5*dim)] = src_addr[j+5];
             dst_addr[negjdim - (6*dim)] = src_addr[j+6];
             dst_addr[negjdim - (7*dim)] = src_addr[j+7];
+            dst_addr[negjdim - (8*dim)] = src_addr[j+8];
+            dst_addr[negjdim - (9*dim)] = src_addr[j+9];
+            dst_addr[negjdim - (10*dim)] = src_addr[j+10];
+            dst_addr[negjdim - (11*dim)] = src_addr[j+11];
+            dst_addr[negjdim - (12*dim)] = src_addr[j+12];
+            dst_addr[negjdim - (13*dim)] = src_addr[j+13];
+            dst_addr[negjdim - (14*dim)] = src_addr[j+14];
+            dst_addr[negjdim - (15*dim)] = src_addr[j+15];
         }
     }
 }
