@@ -240,6 +240,8 @@ void register_rotate_t_functions()
 
 // Your different versions of the blend kernel go here.
 
+typedef vec_t __attribute__ ((pixel));
+
 char naive_blend_descr[] = "naive_blend: Naive baseline implementation";
 void naive_blend(int dim, pixel *src, pixel *dst) // reads global variable `pixel bgc` !
 {
@@ -299,7 +301,7 @@ void blend_32(int dim, pixel *src, pixel *dst)
     }
 }
 
-char blend_16_descr[] = "blend: loop unroll 16";
+char blend_16_descr[] = "blend: loop unroll 16 and ++";
 void blend_16(int dim, pixel *src, pixel *dst)
 {
     int i, j;
