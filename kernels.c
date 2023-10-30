@@ -299,8 +299,8 @@ void blend_32(int dim, pixel *src, pixel *dst)
     }
 }
 
-char blend_32_descr[] = "blend: loop unroll 32";
-void blend_32(int dim, pixel *src, pixel *dst)
+char blend_16_descr[] = "blend: loop unroll 16";
+void blend_16(int dim, pixel *src, pixel *dst)
 {
     int i, j;
 
@@ -345,6 +345,8 @@ void blend(int dim, pixel *src, pixel *dst)
  */
 void register_blend_functions()
 {
+    add_blend_function(&blend_32, blend_32_descr);
+    add_blend_function(&blend_16, blend_16_descr);
     add_blend_function(&blend, blend_descr);
     /* ... Register additional test functions here */
 }
