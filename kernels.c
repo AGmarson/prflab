@@ -68,7 +68,6 @@ void rotate(int dim, pixel *src, pixel *dst)
             dst_addr[-(j+5)*dim] = src_addr[j+5];
             dst_addr[-(j+6)*dim] = src_addr[j+6];
             dst_addr[-(j+7)*dim] = src_addr[j+7];
-            dst_addr[-(j+8)*dim] = src_addr[j+8];
         }
     }
 }
