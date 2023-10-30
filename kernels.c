@@ -48,7 +48,7 @@ void naive_rotate(int dim, pixel *src, pixel *dst)
 char rotate_32_descr[] = "rotate_32: loop unroll 32, blocksize 32";
 void rotate_32(int dim, pixel *src, pixel *dst)
 {
-    int i, j, blocksize, bi, bj;
+    int i, blocksize, bi, bj;
     blocksize = 32;
     for (bi = 0; bi < dim; bi += blocksize)
     {
@@ -98,7 +98,7 @@ void rotate_32(int dim, pixel *src, pixel *dst)
 char rotate_16_descr[] = "rotate_8: loop unroll 16, blocksize 16";
 void rotate_16(int dim, pixel *src, pixel *dst)
 {
-    int i, j, blocksize, bi, bj;
+    int i, blocksize, bi, bj;
     blocksize = 16;
     for (bi = 0; bi < dim; bi += blocksize)
     {
@@ -158,7 +158,7 @@ void rotate_8(int dim, pixel *src, pixel *dst)
 char rotate_4_descr[] = "rotate_4: loop unroll 4, blocksize 4";
 void rotate_4(int dim, pixel *src, pixel *dst)
 {
-    int i, j, blocksize, bi, bj;
+    int i, blocksize, bi, bj;
     blocksize = 4;
     for (bi = 0; bi < dim; bi += blocksize)
     {
