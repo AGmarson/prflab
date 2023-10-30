@@ -310,24 +310,22 @@ void blend_16(int dim, pixel *src, pixel *dst)
         pixel *dst_addr = dst + i * dim;
         for (j = 0; j < dim; j += 16)
         {
-            blend_pixel(&src_addr[0], &dst_addr[0], bgc);
-            blend_pixel(&src_addr[1], &dst_addr[1], bgc);
-            blend_pixel(&src_addr[2], &dst_addr[2], bgc);
-            blend_pixel(&src_addr[3], &dst_addr[3], bgc);
-            blend_pixel(&src_addr[4], &dst_addr[4], bgc);
-            blend_pixel(&src_addr[5], &dst_addr[5], bgc);
-            blend_pixel(&src_addr[6], &dst_addr[6], bgc);
-            blend_pixel(&src_addr[7], &dst_addr[7], bgc);
-            blend_pixel(&src_addr[8], &dst_addr[8], bgc);
-            blend_pixel(&src_addr[9], &dst_addr[9], bgc);
-            blend_pixel(&src_addr[10], &dst_addr[10], bgc);
-            blend_pixel(&src_addr[11], &dst_addr[11], bgc);
-            blend_pixel(&src_addr[12], &dst_addr[12], bgc);
-            blend_pixel(&src_addr[13], &dst_addr[13], bgc);
-            blend_pixel(&src_addr[14], &dst_addr[14], bgc);
-            blend_pixel(&src_addr[15], &dst_addr[15], bgc);
-            src_addr += 16;
-            dst_addr += 16;
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
+            blend_pixel(src_addr++, dst_addr++, bgc);
         }
     }
 }
