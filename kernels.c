@@ -9,7 +9,7 @@
 #include "defs.h"
 #include "smooth.h" // helper functions for naive_smooth
 #include "blend.h"  // helper functions for naive_blend
-
+#define PIXEL_SIZE 8
 /*
  * Please fill in the following struct
  */
@@ -52,18 +52,16 @@ void naive_rotate(int dim, pixel *src, pixel *dst)
 char rotate_descr[] = "rotate: Current working version";
 void rotate(int dim, pixel *src, pixel *dst)
 {
-    printf("pixelsize = %d", sizeof(pixel));
     int i, j;
 
     for (i = 0; i < dim; i++)
     {
-        pixel *src_addr = src + i * dim * sizeof(pixel); //i*dim + j
-        pixel *dst_addr = dst + ((dim - 1) * dim + i) * sizeof(pixel); //(dim - 1 - j)*dim + i
+        pixel *src_addr = src + i * dim * PIXEL_SIZE; //i*dim + j
+        pixel *dst_addr = dst + ((dim - 1) * dim + i) * PIXEL_SIZE; //(dim - 1 - j)*dim + i
     
         for (j = 0; j < dim; j++)
         {
-            *dst_addr = src_addr[j];
-            dst_addr -= dim;
+            dst_addr[-j*dim] = src_addr[j];
         }
     }
 }
