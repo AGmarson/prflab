@@ -158,6 +158,28 @@ void rotate_8(int dim, pixel *src, pixel *dst)
     }
 }
 
+char rotate_4_descr[] = "rotate_4: loop unroll 4, blocksize 4";
+void rotate_4(int dim, pixel *src, pixel *dst)
+{
+    int i, j, blocksize, bi, bj;
+    blocksize = 4;
+    for (bi = 0; bi < dim; bi += blocksize)
+    {
+        for (bj = 0; bj < dim; bj += blocksize)
+        {
+            for (i = bi; i < bi + blocksize; i++)
+            {
+                pixel *src_addr = src + RIDX(i, bj, dim);             // i*dim + bj
+                pixel *dst_addr = dst + RIDX((dim - 1 - bj), i, dim); //(dim - 1 - bj)*dim + i
+                dst_addr[0] = src_addr[0];
+                dst_addr[-dim] = src_addr[1];
+                dst_addr[-(2 * dim)] = src_addr[2];
+                dst_addr[-(3 * dim)] = src_addr[3];
+            }
+        }
+    }
+}
+
 char rotate_descr[] = "rotate: current best working solution";
 void rotate(int dim, pixel *src, pixel *dst)
 {
@@ -175,6 +197,7 @@ void register_rotate_functions()
     add_rotate_function(&rotate_32, rotate_32_descr);
     add_rotate_function(&rotate_16, rotate_16_descr);
     add_rotate_function(&rotate_8, rotate_8_descr);
+    add_rotate_function(&rotate_4, rotate_4_descr);
     add_rotate_function(&rotate, rotate_descr);
     /* ... Register additional test functions here */
 }
