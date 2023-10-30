@@ -132,7 +132,7 @@ void rotate_16(int dim, pixel *src, pixel *dst)
 char rotate_8_descr[] = "rotate_8: loop unroll 8, blocksize 8";
 void rotate_8(int dim, pixel *src, pixel *dst)
 {
-    int i, j, blocksize, bi, bj;
+    int i, blocksize, bi, bj;
     blocksize = 8;
     for (bi = 0; bi < dim; bi += blocksize)
     {
