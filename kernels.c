@@ -51,48 +51,50 @@ void naive_rotate(int dim, pixel *src, pixel *dst)
 char rotate_descr[] = "rotate: Current working version";
 void rotate(int dim, pixel *src, pixel *dst)
 {
-    int i, j;
-
-    for (i = 0; i < dim; i++)
+    int i, j, blocksize, bi, bj;
+    blocksize = 32;
+    for (bi = 0; bi < dim; bi += blocksize)
     {
-        pixel *src_addr = src + i * dim; //i*dim + j
-        pixel *dst_addr = dst + ((dim - 1) * dim + i); //(dim - 1 - j)*dim + i
-    
-        for (j = 0; j < dim; j += 32)
+        for (bj = 0; bj < dim; bj += blocksize)
         {
-            int negjdim = -j*dim;
-            dst_addr[negjdim] = src_addr[j];
-            dst_addr[negjdim - dim] = src_addr[j+1];
-            dst_addr[negjdim - (2*dim)] = src_addr[j+2];
-            dst_addr[negjdim - (3*dim)] = src_addr[j+3];
-            dst_addr[negjdim - (4*dim)] = src_addr[j+4];
-            dst_addr[negjdim - (5*dim)] = src_addr[j+5];
-            dst_addr[negjdim - (6*dim)] = src_addr[j+6];
-            dst_addr[negjdim - (7*dim)] = src_addr[j+7];
-            dst_addr[negjdim - (8*dim)] = src_addr[j+8];
-            dst_addr[negjdim - (9*dim)] = src_addr[j+9];
-            dst_addr[negjdim - (10*dim)] = src_addr[j+10];
-            dst_addr[negjdim - (11*dim)] = src_addr[j+11];
-            dst_addr[negjdim - (12*dim)] = src_addr[j+12];
-            dst_addr[negjdim - (13*dim)] = src_addr[j+13];
-            dst_addr[negjdim - (14*dim)] = src_addr[j+14];
-            dst_addr[negjdim - (15*dim)] = src_addr[j+15];
-            dst_addr[negjdim - (16*dim)] = src_addr[j+16];
-            dst_addr[negjdim - (17*dim)] = src_addr[j+17];
-            dst_addr[negjdim - (18*dim)] = src_addr[j+18];
-            dst_addr[negjdim - (19*dim)] = src_addr[j+19];
-            dst_addr[negjdim - (20*dim)] = src_addr[j+20];
-            dst_addr[negjdim - (21*dim)] = src_addr[j+21];
-            dst_addr[negjdim - (22*dim)] = src_addr[j+22];
-            dst_addr[negjdim - (23*dim)] = src_addr[j+23];
-            dst_addr[negjdim - (24*dim)] = src_addr[j+24];
-            dst_addr[negjdim - (25*dim)] = src_addr[j+25];
-            dst_addr[negjdim - (26*dim)] = src_addr[j+26];
-            dst_addr[negjdim - (27*dim)] = src_addr[j+27];
-            dst_addr[negjdim - (28*dim)] = src_addr[j+28];
-            dst_addr[negjdim - (29*dim)] = src_addr[j+29];
-            dst_addr[negjdim - (30*dim)] = src_addr[j+30];
-            dst_addr[negjdim - (31*dim)] = src_addr[j+31];
+            for (i = bi; i < bi + blocksize; i++)
+            {
+                pixel *src_addr = src + RIDX(i, bj, dim);             // i*dim + j
+                pixel *dst_addr = dst + RIDX((dim - 1 - bj), i, dim); //(dim - 1 - j)*dim + i
+                int negjdim = -j * dim;
+                dst_addr[0] = src_addr[0];
+                dst_addr[-dim] = src_addr[1];
+                dst_addr[-(2 * dim)] = src_addr[2];
+                dst_addr[-(3 * dim)] = src_addr[3];
+                dst_addr[-(4 * dim)] = src_addr[4];
+                dst_addr[-(5 * dim)] = src_addr[5];
+                dst_addr[-(6 * dim)] = src_addr[6];
+                dst_addr[-(7 * dim)] = src_addr[7];
+                dst_addr[-(8 * dim)] = src_addr[8];
+                dst_addr[-(9 * dim)] = src_addr[9];
+                dst_addr[-(10 * dim)] = src_addr[10];
+                dst_addr[-(11 * dim)] = src_addr[11];
+                dst_addr[-(12 * dim)] = src_addr[12];
+                dst_addr[-(13 * dim)] = src_addr[13];
+                dst_addr[-(14 * dim)] = src_addr[14];
+                dst_addr[-(15 * dim)] = src_addr[15];
+                dst_addr[-(16 * dim)] = src_addr[16];
+                dst_addr[-(17 * dim)] = src_addr[17];
+                dst_addr[-(18 * dim)] = src_addr[18];
+                dst_addr[-(19 * dim)] = src_addr[19];
+                dst_addr[-(20 * dim)] = src_addr[20];
+                dst_addr[-(21 * dim)] = src_addr[21];
+                dst_addr[-(22 * dim)] = src_addr[22];
+                dst_addr[-(23 * dim)] = src_addr[23];
+                dst_addr[-(24 * dim)] = src_addr[24];
+                dst_addr[-(25 * dim)] = src_addr[25];
+                dst_addr[-(26 * dim)] = src_addr[26];
+                dst_addr[-(27 * dim)] = src_addr[27];
+                dst_addr[-(28 * dim)] = src_addr[28];
+                dst_addr[-(29 * dim)] = src_addr[29];
+                dst_addr[-(30 * dim)] = src_addr[30];
+                dst_addr[-(31 * dim)] = src_addr[31];
+            }
         }
     }
 }
