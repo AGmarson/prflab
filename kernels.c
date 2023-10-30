@@ -44,10 +44,7 @@ void naive_rotate(int dim, pixel *src, pixel *dst)
             dst[RIDX(dim - 1 - j, i, dim)] = src[RIDX(i, j, dim)];
 }
 
-/*
- * rotate - Your current working version of rotate
- * IMPORTANT: This is the version you will be graded on
- */
+
 char rotate_32_descr[] = "rotate_32: loop unroll 32, blocksize 32";
 void rotate_32(int dim, pixel *src, pixel *dst)
 {
@@ -180,6 +177,10 @@ void rotate_4(int dim, pixel *src, pixel *dst)
     }
 }
 
+/*
+ * rotate - Your current working version of rotate
+ * IMPORTANT: This is the version you will be graded on
+ */
 char rotate_descr[] = "rotate: current best working solution";
 void rotate(int dim, pixel *src, pixel *dst)
 {
@@ -252,7 +253,50 @@ void naive_blend(int dim, pixel *src, pixel *dst) // reads global variable `pixe
 char blend_descr[] = "blend: Current working version";
 void blend(int dim, pixel *src, pixel *dst)
 {
-    naive_blend(dim, src, dst);
+    int i, j;
+
+    for (i = 0; i < dim; i++)
+    {
+        pixel *src_addr = src + i * dim; //i*dim + j
+        pixel *dst_addr = dst + i * dim;
+        for (j = 0; j < dim; j += 32)
+        {
+            blend_pixel(&src_addr[0], &dst_addr[0], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[1], &dst_addr[1], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[2], &dst_addr[2], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[3], &dst_addr[3], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[4], &dst_addr[4], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[5], &dst_addr[5], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[6], &dst_addr[6], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[7], &dst_addr[7], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[8], &dst_addr[8], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[9], &dst_addr[9], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[10], &dst_addr[10], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[11], &dst_addr[11], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[12], &dst_addr[12], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[13], &dst_addr[13], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[14], &dst_addr[14], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[15], &dst_addr[15], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[16], &dst_addr[16], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[17], &dst_addr[17], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[18], &dst_addr[18], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[19], &dst_addr[19], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[20], &dst_addr[20], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[21], &dst_addr[21], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[22], &dst_addr[22], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[23], &dst_addr[23], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[24], &dst_addr[24], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[25], &dst_addr[25], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[26], &dst_addr[26], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[27], &dst_addr[27], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[28], &dst_addr[28], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[29], &dst_addr[29], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[30], &dst_addr[30], bgc); // `blend_pixel` defined in blend.c
+            blend_pixel(&src_addr[31], &dst_addr[31], bgc); // `blend_pixel` defined in blend.c
+            src_addr += 32;
+            dst_addr += 32;
+        }
+    }
 }
 
 /*
