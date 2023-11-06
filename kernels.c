@@ -240,7 +240,7 @@ void register_rotate_t_functions()
 
 // Your different versions of the blend kernel go here.
 
-typedef vec_t __attribute__ ((pixel));
+//typedef pixel vec_t __attribute__ ((vector_size(32 / sizeof(int))));
 
 char naive_blend_descr[] = "naive_blend: Naive baseline implementation";
 void naive_blend(int dim, pixel *src, pixel *dst) // reads global variable `pixel bgc` !
